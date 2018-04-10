@@ -1,0 +1,26 @@
+namespace com.cams
+
+participant banco identified by idBanco {
+  o String idBanco
+}
+
+participant colector identified by idColector {
+  o String idColector
+}
+
+participant productor identified by idProductor {
+  o String idProductor
+}
+
+participant aseguradora identified by idAseguradora {
+  o String idAseguradora
+}
+
+asset activo identified by idActivo {
+  o String idActivo
+  --> productor owner optional
+}
+
+transaction transactionName {
+  o String detail
+}
