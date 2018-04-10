@@ -1,0 +1,123 @@
+
+namespace com.cams
+
+/**
+ * Concept for an address 
+ */
+
+concept Address {
+  o String country
+  o String city optional
+  o String street1 optional
+  o String street2 optional
+}
+
+concept Company {
+  o String companyName
+  o Address address
+  o Double accountBalance
+}
+
+abstract participant User identified by username {
+  o String username
+  o Address address
+  o Double accountBalance
+  o Company company optional
+}
+
+abstract participant Institution identified by institutionName {
+  o String institutionName
+  o Address address
+  o Double accountBalance
+}
+
+/**
+ * 
+ */
+participant Producer extends User {
+}
+
+/**
+ * 
+ */
+/* participant Seller extends User {
+} */
+
+/**
+ * 
+ */
+participant Collector extends User {
+}
+
+/**
+ * 
+ */
+/* participant Consumer extends User {
+} */
+
+/**
+ * 
+ */
+/* participant Manager extends Institution {
+} */
+
+/**
+ * 
+ */
+participant Bank extends Institution  {
+}
+
+/**
+ * 
+ */
+participant Insurer extends Institution  {
+}
+
+/**
+ *
+ */
+asset Vehicle identified by idVehicle {
+  o String idVehicle
+  o Double valueAsset
+  o String intentionOfDematerialization
+  --> Producer ownerProducer optional
+  --> Collector ownerCollector optional
+/*   --> Seller ownerSeller optional
+  --> Consumer ownerConsumer optional */
+/*   --> Manager ownerManager optional */
+  --> Bank ownerBank optional
+  --> Insurer ownerInsurer optional 
+}
+
+asset House identified by idHouse {
+  o String idHouse
+  o Double valueAsset
+  --> Producer ownerProducer optional
+  --> Collector ownerCollector optional
+/*   --> Seller ownerSeller optional
+  --> Consumer ownerConsumer optional
+  --> Manager ownerManager optional */
+  --> Bank ownerBank optional
+  --> Insurer ownerInsurer optional 
+}
+
+asset Building identified by idBuilding {
+  o String idBuilding
+  o Double valueAsset
+  --> Producer ownerProducer optional
+  --> Collector ownerCollector optional
+/*   --> Seller ownerSeller optional
+  --> Consumer ownerConsumer optional
+  --> Manager ownerManager optional */
+  --> Bank ownerBank optional
+  --> Insurer ownerInsurer optional 
+}
+
+transaction transactionToBank {
+  o String detail
+  o String trans
+}
+
+transaction declareOwnershipOfAsset {
+  o String thing
+}
